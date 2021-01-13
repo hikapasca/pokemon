@@ -1,0 +1,9 @@
+{
+  "presets": [
+    [
+      "@babel/preset-react",
+      { "runtime": "classic", "importSource": "@emotion/react" }
+    ]
+  ],
+  "plugins": ["@emotion/babel-plugin"]
+}
