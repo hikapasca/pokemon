@@ -2,12 +2,38 @@ import { css } from "@emotion/css";
 import pokemonLogo from "../asset/pokemon-logo.png";
 import pokemonListIcon from "../asset/icon-pokemonlist.png";
 import myPokemonIcon from "../asset/icon-mypokemon.png";
-const windowWidth = window.innerWidth;
+import { useMediaQuery } from "react-responsive";
+import React, { useState, useEffect } from "react";
+import { useHistory, NavLink } from "react-router-dom";
+
 const NavbarComponent = () => {
+  const history = useHistory();
+
+  const [currentUrl, setCurrentUrl] = useState("/");
+
+  const isMobile = useMediaQuery({ query: `(min-width: 700px)` });
+
+  const moveToHome = () => {
+    // history.push("/");
+  };
+
+  const moveToPokemonList = () => {
+    history.push("/");
+  };
+
+  const moveToMyPokemon = () => {
+    history.push("/mypokemon");
+  };
   const liStyle = () => {
     return css`
       float: right;
       cursor: pointer;
+    `;
+  };
+
+  const displayNone = () => {
+    return css`
+      display: none;
     `;
   };
 
@@ -27,7 +53,7 @@ const NavbarComponent = () => {
       overflow: hidden;
       background-color: #006678;
       border-style: none;
-      position: fixed;
+      position: sticky;
       top: 0;
       width: 100%;
     `;
@@ -53,14 +79,19 @@ const NavbarComponent = () => {
       text-decoration: none;
     `;
   };
+
   return (
     <nav>
+      {console.log(currentUrl, "cel")}
       <ul className={ulStyle()}>
-        <li className={liLogostyle()}>
-          <img src={pokemonLogo} alt="pokemonLogo" />
+        <li className={isMobile ? liLogostyle() : displayNone()}>
+          <NavLink to="/">
+            <img src={pokemonLogo} alt="pokemonLogo" />
+          </NavLink>
         </li>
+
         <li className={liStyle()}>
-          <div className={liItemStyle()}>
+          <div className={liItemStyle()} onClick={() => moveToMyPokemon()}>
             <img src={myPokemonIcon} alt="myPokemonIcon" />
             <br />
             <a className={aItemStyle()} href="#contact">
@@ -69,7 +100,7 @@ const NavbarComponent = () => {
           </div>
         </li>
         <li className={liStyle()}>
-          <div className={liItemStyle()}>
+          <div className={liItemStyle()} onClick={() => moveToPokemonList()}>
             <img src={pokemonListIcon} alt="pokemonListIcon" />
             <br />
             <a className={aItemStyle()} href="#contact">
