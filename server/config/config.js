@@ -18,7 +18,7 @@ module.exports = {
     username: process.env.USERNAME_PRODUCTION,
     password: process.env.PASSWORD_PRODUCTION,
     database: process.env.DATABASE_PRODUCTION,
-    host: process.env.HOST_PRODUCTION,
+    host: "ec2-34-200-158-205.compute-1.amazonaws.com",
     dialect: "postgres",
   },
 };
