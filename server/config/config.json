@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "myPokemon",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "myPokemon_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "pfashkutsactkd",
+    "password": "762d4f1914a3fcfc73e762d5c2fa75f1567a46d2f2067b01a2c58642baab922f",
+    "database": "d9crvqhge8615q",
+    "host": "ec2-34-200-158-205.compute-1.amazonaws.com",
+    "dialect": "postgres"
+  }
+}
