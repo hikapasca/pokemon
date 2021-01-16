@@ -16,7 +16,7 @@ function myPokemonReducer(state = initialState, action) {
       return {
         ...state,
         myPokemon: state.myPokemon.filter(
-          (data) => data.username !== action.payload
+          (data) => data.name !== action.payload
         ),
       };
     default:

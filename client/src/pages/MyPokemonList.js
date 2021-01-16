@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../component/CardsMyPokemon";
-import { getMyPokemon } from "../store/actions/myPokemonAction";
+import {
+  getMyPokemon,
+  deleteMyPokemon,
+} from "../store/actions/myPokemonAction";
 
 const MyPokemonList = () => {
   const dispatch = useDispatch();

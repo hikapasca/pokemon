@@ -4,10 +4,10 @@ export const getMyPokemon = () => {
       .then((resp) => {
         return resp.json();
       })
-      .then(({ message }) => {
+      .then((result) => {
         dispatch({
           type: "SET_MY_POKEMON",
-          payload: message,
+          payload: result,
         });
       })
       .catch((err) => {

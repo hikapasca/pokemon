@@ -5,6 +5,7 @@ import { GET_POKEMONS } from "../graphql/graphql";
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../component/CardsPokemonList";
 import { getMyPokemon } from "../store/actions/myPokemonAction";
+import Loading from "../component/Loading";
 
 const gqlVariables = {
   limit: 100,
@@ -46,20 +47,21 @@ const PokemonList = () => {
     }
     return copyData;
   };
-  loading && console.log(loading, "Cekcekcekloading");
-  error && console.log(error, "ini eerror");
-  // if (loading) return "Loading...";
-  // if (error) return `Error! ${error.message}`;
-  return (
-    <div style={{ marginTop: "100px" }}>
-      {loading && <h2>sdsd</h2>}
 
-      {data &&
-        setCount().map((result, idx) => (
-          <Cards dataPokemon={result} key={idx} />
-        ))}
-    </div>
-  );
+  error && console.log(error, "ini eerror");
+  if (loading) return <Loading />;
+  if (error) return `Error! ${error.message}`;
+  if (data)
+    return (
+      <div style={{ marginTop: "100px" }}>
+        {/* {loading && <h2>sdsd</h2>} */}
+
+        {data &&
+          setCount().map((result, idx) => (
+            <Cards dataPokemon={result} key={idx} />
+          ))}
+      </div>
+    );
 };
 
 export default PokemonList;
