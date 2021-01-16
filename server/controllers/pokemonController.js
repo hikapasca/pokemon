@@ -1,56 +1,37 @@
-const PokemonModel = require("../models/Pokemon");
+const { MyPokemon } = require("../models");
 class PokemonController {
-  static async addToMyPokemon(req, res) {
+  static async addToMyPokemon(req, res, next) {
     try {
-      const dataFromDB = await PokemonModel.getAll();
-      let checkAvalaibility = 0;
-
-      dataFromDB.forEach((result) => {
-        if (result.data().name === req.body.name) {
-          checkAvalaibility += 1;
-        }
-      });
-      if (checkAvalaibility !== 0) {
-        return res
-          .status(404)
-          .json({ message: "this name has been registered before" });
-      } else if (!req.body.name) {
-        return res.status(400).json({ message: "name cannot empty!" });
-      } else if (!req.body.pokemonName) {
-        return res.status(400).json({ message: "pokemon name cannot empty!" });
-      } else if (!req.body.imageUrl) {
-        return res.status(400).json({ message: "image cannot empty!" });
-      }
-      {
-        await PokemonModel.addPokemon(req.body, req.body.name);
-        return res.status(201).json({ message: req.body });
-      }
+      const result = await MyPokemon.create(req.body);
+      return res.status(201).json(result);
     } catch (err) {
-      return res.status(500).json({ message: req.body });
+      next(err);
     }
   }
 
-  static async readMyPokemon(req, res) {
+  static async readMyPokemon(req, res, next) {
     try {
-      const dataFromDB = await PokemonModel.getAll();
-      const data = [];
-      dataFromDB.forEach((result) => {
-        data.push(result.data());
-      });
-      return res.status(200).json({ message: data });
-    } catch (error) {
-      return res.status(500).json({ message: error });
-    }
+      const result = await MyPokemon.findAll();
+      return res.status(200).json(result);
+    } catch (err) {}
   }
 
-  static async deleteMyPokemon(req, res) {
+  static async deleteMyPokemon(req, res, next) {
     try {
-      let params = req.params.pokemon;
+      let param = req.params.pokemon;
 
-      await PokemonModel.deletePokemon(params);
-      return res.status(200).json({ message: "success delete pokemon" });
+      const result = await MyPokemon.destroy({
+        where: { name: param },
+        returning: true,
+      });
+
+      if (!result) {
+        throw { name: "data not found" };
+      } else {
+        return res.status(200).json({ message: "success delete" });
+      }
     } catch (err) {
-      return res.status(500).json({ message: err });
+      next(err);
     }
   }
 }

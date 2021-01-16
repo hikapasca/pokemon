@@ -9,11 +9,17 @@
     "express": "^4.17.1",
     "firebase-admin": "^9.4.2",
     "pg": "^8.5.1",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "supertest": "^6.1.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --runInBand --detectOpenHandles --forceExit --coverage",
+    "start": "nodemon app.js",
+    "db:create:test": "NODE_ENV=test npx sequelize-cli db:create",
+    "db:migrate:test": "NODE_ENV=test npx sequelize-cli db:migrate"
   },
   "keywords": [],
   "author": "Muhammad Nur Hika Pasca",
