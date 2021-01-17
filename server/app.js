@@ -5,8 +5,6 @@ const PORT = process.env.PORT || 3000;
 const cors = require("cors");
 const routes = require("./routes");
 const errorHandler = require("./middlewares/errorHandler");
-const pg = require("pg");
-pg.defaults.ssl = true;
 
 app.use(cors());
 app.use(express.urlencoded({ extended: "true" }));
