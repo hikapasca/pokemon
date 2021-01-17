@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { GET_DETAIL_POKEMON } from "../graphql/graphql";
-import { useParams } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import Detail from "../component/Details";
 import Loading from "../component/Loading";
 export const PokemonDetail = () => {
@@ -10,7 +10,7 @@ export const PokemonDetail = () => {
     variables: { name: param.pokemon },
   });
   if (loading) return <Loading />;
-  if (error) return `Error! ${error.message}`;
+  if (error) return <Redirect to="/" />;
   if (data)
     return (
       <div>

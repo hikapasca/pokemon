@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { css } from "@emotion/css";
+import { cardsContainer, cards } from "../style/PokemonListStyle";
 import { GET_POKEMONS } from "../graphql/graphql";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 import Cards from "../component/CardsPokemonList";
 import { getMyPokemon } from "../store/actions/myPokemonAction";
 import Loading from "../component/Loading";
@@ -48,18 +49,17 @@ const PokemonList = () => {
     return copyData;
   };
 
-  error && console.log(error, "ini eerror");
   if (loading) return <Loading />;
-  if (error) return `Error! ${error.message}`;
+  if (error) return <Redirect to="/" />;
   if (data)
     return (
-      <div style={{ marginTop: "100px" }}>
-        {/* {loading && <h2>sdsd</h2>} */}
-
-        {data &&
-          setCount().map((result, idx) => (
-            <Cards dataPokemon={result} key={idx} />
-          ))}
+      <div className={cardsContainer()}>
+        <div className={cards()}>
+          {data &&
+            setCount().map((result, idx) => (
+              <Cards dataPokemon={result} key={idx} />
+            ))}
+        </div>
       </div>
     );
 };
