@@ -1,6 +1,11 @@
 import "./App.css";
 import { PokemonList, PokemonDetail, MyPokemonList } from "./pages";
-import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import Navbar from "./component/Navbar";
 import { Provider } from "react-redux";
@@ -21,6 +26,7 @@ function App() {
               <Route exact path="/" component={PokemonList} />
               <Route exact path="/detail/:pokemon" component={PokemonDetail} />
               <Route exact path="/mypokemon" component={MyPokemonList} />
+              <Redirect to="/" />
             </Switch>
           </div>
         </Router>

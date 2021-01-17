@@ -1,6 +1,6 @@
 export const getMyPokemon = () => {
   return (dispatch, getState) => {
-    fetch(`http://localhost:3000/`)
+    fetch(`https://radiant-coast-03498.herokuapp.com/`)
       .then((resp) => {
         return resp.json();
       })
@@ -18,7 +18,7 @@ export const getMyPokemon = () => {
 
 export const deleteMyPokemon = (pokemonId) => {
   return (dispatch, getState) => {
-    fetch(`http://localhost:3000/${pokemonId}`, {
+    fetch(`https://radiant-coast-03498.herokuapp.com/${pokemonId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
