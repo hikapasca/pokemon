@@ -1,6 +1,8 @@
 # pokemon
 
 A Pokemon App.
+<img src="./examples/pokemonList.png" width="720">
+<br>
 This app has:
 
 - Used Technology on Server Port 3000:
